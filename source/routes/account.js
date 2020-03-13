@@ -6,7 +6,7 @@ const Route = express.Router()
 const {
     createAccount,
     readAccount,
-    // updateAccount,
+    updateAccount,
     // deleteAccount,
     // login
 } = require('../controllers/account')
@@ -16,7 +16,7 @@ const { uploadImages } = require("../controllers/upload");
 Route
     .post('/', uploadImages, createAccount)
     .get('/', readAccount)
-    .patch('/:accountId')
+    .patch('/:accountId', uploadImages, updateAccount)
     .delete('/:accountId')
     .post('/login')
 
