@@ -3,16 +3,16 @@ const Route = express.Router()
 
 // const { authentication, authorization } = require("../helpers/auth");
 
-// const {
-//     createCategory,
+const {
+    createCategory,
 //     readCategory,
 //     updateCategory,
 //     deleteCategory,
 //     ignoreFavicon
-// } = require('../controllers/category')
+} = require('../controllers/category')
 
 Route
-    .post('/')
+    .post('/', createCategory)
     .get('/')
     .get('/:categoryName')
     .patch('/:categoryId')
