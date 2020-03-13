@@ -27,5 +27,16 @@ module.exports = {
                 resolve(result)
             })
         })
+    },
+    deleteAccount: (data) => {
+        return new Promise((resolve, reject) => {
+            connection.query(`DELETE FROM account WHERE id = ?`, data)
+            connection.query('SELECT * FROM account', (error, result) => {
+                if (error) reject(new Error(error))
+                connection.query('ALTER TABLE account DROP id')
+                connection.query('ALTER TABLE account ADD id INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST')
+                resolve(result)
+            })
+        })
     }
 }

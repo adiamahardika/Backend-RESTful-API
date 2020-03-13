@@ -89,5 +89,15 @@ module.exports = {
             console.log(error);
             funcHelpers.cumstomErrorResponse(response, 404, "Update Account Failed!");
         }
+    },
+    deleteAccount: async (request, response) => {
+        try {
+            const data = request.params.accountId
+            const result = await accountModel.deleteAccount(data)
+            funcHelpers.response(response, 200, result)
+        } catch (error) {
+            console.log(error)
+            funcHelpers.cumstomErrorResponse(response, 404, 'Delete Account Failed!')
+        }
     }
 }
