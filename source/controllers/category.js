@@ -46,5 +46,14 @@ module.exports = {
         } catch (error) {
             funcHelpers.customErrorResponse(response, 404, 'Cannot Update Category!')
         }
+    },
+    deleteCategory: async (request, response) => {
+        try {
+            const data = request.params.categoryId
+            const result = await categoryModel.deleteCategory(data)
+            funcHelpers.response(response, 200, result)
+        } catch (error) {
+            funcHelpers.customErrorResponse(response, 404, `Cannot Delete Category!`)
+        }
     }
 }
