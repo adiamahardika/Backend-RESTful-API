@@ -7,7 +7,7 @@ const {
     createAccount,
     readAccount,
     updateAccount,
-    // deleteAccount,
+    deleteAccount,
     // login
 } = require('../controllers/account')
 
@@ -17,7 +17,7 @@ Route
     .post('/', uploadImages, createAccount)
     .get('/', readAccount)
     .patch('/:accountId', uploadImages, updateAccount)
-    .delete('/:accountId')
+    .delete('/:accountId', deleteAccount)
     .post('/login')
 
 module.exports = Route
