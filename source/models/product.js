@@ -53,4 +53,13 @@ module.exports = {
             }
         })
     },
+    updateProduct: (data) => {
+        return new Promise((resolve, reject) => {
+            connection.query(`UPDATE product SET ? WHERE id = ?`, [data, data.id])
+            connection.query('SELECT product.*, category.name_category FROM product INNER JOIN category ON product.id_category = category.id', (error, result) => {
+                if (error) reject(new Error(error))
+                resolve(result)
+            })
+        })
+    },
 }
