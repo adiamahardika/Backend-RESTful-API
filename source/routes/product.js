@@ -6,7 +6,7 @@ const Route = express.Router();
 const {
     createProduct,
     readProduct,
-    //  updateProduct,
+    updateProduct,
     //  deleteProduct,
     //  ignoreFavicon
 } = require("../controllers/product");
@@ -17,7 +17,7 @@ Route
     .post("/", uploadImages, createProduct)
     .get("/", readProduct)
     .get("/:productId")
-    .patch("/:productId")
+    .patch("/:productId", uploadImages, updateProduct)
     .delete("/:productId")
 
 module.exports = Route;

@@ -30,5 +30,21 @@ module.exports = {
         } catch (error) {
             funcHelpers.customErrorResponse(response, 404, 'Cannot Read Category!')
         }
+    },
+    updateCategory: async (request, response) => {
+        try {
+            const id = request.params.categoryId
+            const {
+                name_category
+            } = request.body
+            const data = {
+                id,
+                name_category
+            }
+            const result = await categoryModel.updateCategory(data)
+            funcHelpers.response(response, 200, result)
+        } catch (error) {
+            funcHelpers.customErrorResponse(response, 404, 'Cannot Update Category!')
+        }
     }
 }

@@ -26,5 +26,14 @@ module.exports = {
                 })
             }
         })
+    },
+    updateCategory: (data) => {
+        return new Promise((resolve, reject) => {
+            connection.query(`UPDATE category SET ? WHERE id = ?`, [data, data.id])
+            connection.query(`SELECT * FROM category`, (error, result) => {
+                if (error) reject(new Error(error))
+                resolve(result)
+            })
+        })
     }
 }

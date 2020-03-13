@@ -61,4 +61,61 @@ module.exports = {
             funcHelpers.customErrorResponse(response, 404, 'Read Product Failed!')
         }
     },
+    updateProduct: async (request, response) => {
+        try {
+            if (!request.file || Object.keys(request.file).length === 0) {
+                const id = request.params.productId;
+                const {
+                    name_product,
+                    description,
+                    ingredients,
+                    quantity,
+                    price,
+                    id_category
+                } = request.body;
+
+                const data = {
+                    id,
+                    name_product,
+                    description,
+                    ingredients,
+                    quantity,
+                    price,
+                    id_category,
+                    date_updated: new Date()
+                };
+
+                const result = await productModel.updateProduct(data);
+                return funcHelpers.response(response, 200, result);
+            }
+
+            const id = request.params.productId;
+            const {
+                name_product,
+                description,
+                ingredients,
+                quantity,
+                price,
+                id_category
+            } = request.body;
+
+            const data = {
+                id,
+                name_product,
+                image: `${url}upload/${request.file.filename}`,
+                description,
+                ingredients,
+                quantity,
+                price,
+                id_category,
+                date_updated: new Date()
+            };
+
+            const result = await productModel.updateProduct(data);
+            funcHelpers.response(response, 200, result);
+        } catch (error) {
+            console.log(error);
+            funcHelpers.cumstomErrorResponse(response, 404, "Update Product Failed!");
+        }
+    },
 }
