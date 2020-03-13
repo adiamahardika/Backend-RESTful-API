@@ -41,7 +41,7 @@ module.exports = {
                 })
             } else if (product != null || category != null || paginateId != null || limit != null || sortBy != null || orderBy != null) {
                 let paginateStart = ((paginateId * limit) - limit)
-                connection.query('SELECT product.*, category.name_category FROM product INNER JOIN category ON product.id_category = category.id WHERE product.name_product LIKE "%' + product + '%" AND category.name_category LIKE "%' + category + '%" ORDER BY ' + sortBy + ' ' + orderBy + ' LIMIT ' + paginateStart + ',' + limit, (error, result) => {
+                connection.query('SELECT product.*, category.name_category FROM product INNER JOIN category ON product.id_category = category.id WHERE product.name_product LIKE "%' + product + '%" AND category.id LIKE "%' + category + '%" ORDER BY ' + sortBy + ' ' + orderBy + ' LIMIT ' + paginateStart + ',' + limit, (error, result) => {
                     if (error) reject(new Error(error))
                     resolve(result)
                 })
