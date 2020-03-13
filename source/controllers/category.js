@@ -14,7 +14,21 @@ module.exports = {
             const result = await categoryModel.createCategory(data)
             funcHelpers.response(response, 200, result)
         } catch (error) {
-            funcHelpers.customErrorResponse(response, 404, 'Cannot Create Category!yy')
+            funcHelpers.customErrorResponse(response, 404, 'Cannot Create Category!')
+        }
+    }, 
+    readCategory: async (request, response) => {
+        try{
+            const {
+                categoryName
+            } = request.params
+            const data = {
+                categoryName
+            }
+            const result = await categoryModel.readCategory(data)
+            funcHelpers.response(response, 200, result)
+        } catch (error) {
+            funcHelpers.customErrorResponse(response, 404, 'Cannot Read Category!')
         }
     }
 }
