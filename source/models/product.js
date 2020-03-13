@@ -27,4 +27,30 @@ module.exports = {
             })
         })
     },
+    readProduct: (product, category, data) => {
+        const productId = data.productId
+        const paginateId = data.paginateId
+        const limit = data.limit
+        const sortBy = data.sortBy
+        const orderBy = data.orderBy
+        return new Promise((resolve, reject) => {
+            if (productId != null) {
+                connection.query('SELECT product.*, category.name_category FROM product INNER JOIN category ON product.id_category = category.id WHERE product.id = ?', productId, (error, result) => {
+                    if (error) reject(new Error(error))
+                    resolve(result)
+                })
+            } else if (product != null || category != null || paginateId != null || limit != null || sortBy != null || orderBy != null) {
+                let paginateStart = ((paginateId * limit) - limit)
+                connection.query('SELECT product.*, category.name_category FROM product INNER JOIN category ON product.id_category = category.id WHERE product.name_product LIKE "%' + product + '%" AND category.name_category LIKE "%' + category + '%" ORDER BY ' + sortBy + ' ' + orderBy + ' LIMIT ' + paginateStart + ',' + limit, (error, result) => {
+                    if (error) reject(new Error(error))
+                    resolve(result)
+                })
+            } else {
+                connection.query('SELECT product.*, category.name_category FROM product INNER JOIN category ON product.id_category = category.id', (error, result) => {
+                    if (error) reject(new Error(error))
+                    resolve(result)
+                })
+            }
+        })
+    },
 }

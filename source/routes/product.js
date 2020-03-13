@@ -5,7 +5,7 @@ const Route = express.Router();
 
 const {
     createProduct,
-    //  readProduct,
+    readProduct,
     //  updateProduct,
     //  deleteProduct,
     //  ignoreFavicon
@@ -15,7 +15,7 @@ const { uploadImages } = require("../controllers/upload");
 
 Route
     .post("/", uploadImages, createProduct)
-    .get("/")
+    .get("/", readProduct)
     .get("/:productId")
     .patch("/:productId")
     .delete("/:productId")
