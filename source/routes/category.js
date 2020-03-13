@@ -7,8 +7,7 @@ const {
     createCategory,
     readCategory,
     updateCategory,
-//     deleteCategory,
-//     ignoreFavicon
+    deleteCategory
 } = require('../controllers/category')
 
 Route
@@ -16,6 +15,6 @@ Route
     .get('/', readCategory)
     .get('/:categoryName', readCategory)
     .patch('/:categoryId', updateCategory)
-    .delete('/:categoryId')
+    .delete('/:categoryId', deleteCategory)
 
 module.exports = Route
