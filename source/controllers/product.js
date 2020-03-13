@@ -55,7 +55,11 @@ module.exports = {
             }
 
             const result = await productModel.readProduct(product, category, data)
-            funcHelpers.response(response, 200, result)
+            const totalData = await productModel.countProduct(product, category)
+            const amount = Math.ceil(totalData / limit)
+            const paginateTab = { amount }
+
+            funcHelpers.responsePaginate(response, 200, result, parseInt(paginateId), paginateTab)
         } catch (error) {
             console.log(error)
             funcHelpers.customErrorResponse(response, 404, 'Read Product Failed!')
