@@ -118,4 +118,18 @@ module.exports = {
             funcHelpers.cumstomErrorResponse(response, 404, "Update Product Failed!");
         }
     },
+    deleteProduct: async (request, response) => {
+        try {
+            const productId = request.params.productId
+
+            const data = {
+                productId
+            }
+            const result = await productModel.deleteProduct(data);
+            funcHelpers.response(response, 200, result);
+        } catch (error) {
+            console.log(error);
+            funcHelpers.cumstomErrorResponse(response, 404, "Delete Product Failed!");
+        }
+    },
 }
