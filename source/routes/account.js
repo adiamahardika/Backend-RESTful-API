@@ -8,7 +8,7 @@ const {
     readAccount,
     updateAccount,
     deleteAccount,
-    // login
+    login
 } = require('../controllers/account')
 
 const { uploadImages } = require("../controllers/upload");
@@ -18,6 +18,6 @@ Route
     .get('/', readAccount)
     .patch('/:accountId', uploadImages, updateAccount)
     .delete('/:accountId', deleteAccount)
-    .post('/login')
+    .post('/login', login)
 
 module.exports = Route
