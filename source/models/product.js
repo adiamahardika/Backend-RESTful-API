@@ -62,4 +62,15 @@ module.exports = {
             })
         })
     },
+    deleteProduct: (data) => {
+        return new Promise((resolve, reject) => {
+            connection.query(`DELETE FROM product WHERE id = ?`, data.productId)
+            connection.query('SELECT product.*, category.name_category FROM product INNER JOIN category ON product.id_category = category.id', (error, result) => {
+                if (error) reject(new Error(error))
+                connection.query('ALTER TABLE product DROP id')
+                connection.query('ALTER TABLE product ADD id INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST')
+                resolve(result)
+            })
+        })
+    },
 }
