@@ -18,5 +18,14 @@ module.exports = {
                 resolve(result)
             })
         })
+    },
+    updateAccount: (data) => {
+        return new Promise((resolve, reject) => {
+            connection.query('UPDATE account SET ? WHERE id = ?', [data, data.id])
+            connection.query('SELECT * FROM account', (error, result) => {
+                if (error) reject(new Error(error))
+                resolve(result)
+            })
+        })
     }
 }
