@@ -1,5 +1,10 @@
 const accountModel = require("../models/account");
 const funcHelpers = require("../helpers");
+const JWT = require('jsonwebtoken')
+const {
+    JWT_KEY
+} = require('../configs/mysql')
+
 
 module.exports = {
     createAccount: async (request, response) => {
@@ -98,6 +103,34 @@ module.exports = {
         } catch (error) {
             console.log(error)
             funcHelpers.cumstomErrorResponse(response, 404, 'Delete Account Failed!')
+        }
+    },
+    login: async (request, response) => {
+        const data = {
+            password: request.body.password,
+            email: request.body.email
+        }
+
+        const emailValid = await accountModel.checkEmail(data.email)
+        const dataUser = emailValid[0]
+        const hashPassword = funcHelpers.setPassword(data.password, dataUser.salt)
+
+        if (hashPassword.passwordHash === dataUser.password) {
+            const token = JWT.sign({
+                email: dataUser.email,
+                id: dataUser.id
+            }, JWT_KEY, {
+                expiresIn: '1d'
+            })
+
+            delete dataUser.salt
+            delete dataUser.password
+
+            dataUser.token = token
+
+            funcHelpers.response(response, 200, dataUser)
+        } else {
+            funcHelpers.cumstomErrorResponse(response, 404, 'Login Account Failed!')
         }
     }
 }
