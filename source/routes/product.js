@@ -7,8 +7,7 @@ const {
     createProduct,
     readProduct,
     updateProduct,
-    //  deleteProduct,
-    //  ignoreFavicon
+    deleteProduct,
 } = require("../controllers/product");
 
 const { uploadImages } = require("../controllers/upload");
@@ -16,8 +15,8 @@ const { uploadImages } = require("../controllers/upload");
 Route
     .post("/", uploadImages, createProduct)
     .get("/", readProduct)
-    .get("/:productId")
+    .get("/:productId", readProduct)
     .patch("/:productId", uploadImages, updateProduct)
-    .delete("/:productId")
+    .delete("/:productId", deleteProduct)
 
 module.exports = Route;
