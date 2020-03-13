@@ -6,7 +6,7 @@ const Route = express.Router()
 const {
     createCategory,
     readCategory,
-//     updateCategory,
+    updateCategory,
 //     deleteCategory,
 //     ignoreFavicon
 } = require('../controllers/category')
@@ -14,8 +14,8 @@ const {
 Route
     .post('/', createCategory)
     .get('/', readCategory)
-    .get('/:categoryName')
-    .patch('/:categoryId')
+    .get('/:categoryName', readCategory)
+    .patch('/:categoryId', updateCategory)
     .delete('/:categoryId')
 
 module.exports = Route
