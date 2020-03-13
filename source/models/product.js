@@ -3,7 +3,7 @@ const connection = require('../configs/database')
 module.exports = {
     countProduct: (product, category) => {
         return new Promise((resolve, reject) => {
-            if (product != null || category) {
+            if (product != null || category != null) {
                 connection.query('SELECT COUNT(*) AS totalData FROM product LEFT JOIN category ON product.id_category = category.id WHERE product.name_product LIKE "%' + product + '%" AND category.id LIKE "%' + category + '%"', (error, result) => {
                     if (error) reject(new Error(error))
                     resolve(result[0].totalData)
