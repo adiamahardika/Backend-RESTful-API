@@ -25,5 +25,14 @@ module.exports = {
             console.log(error)
             funcHelpers.cumstomErrorResponse(response, 404, 'Create Account Failed!')
         }
+    },
+    readAccount: async (request, response) => {
+        try {
+            const result = await accountModel.readAccount()
+            funcHelpers.response(response, 200, result)
+        } catch (error) {
+            console.log(error)
+            funcHelpers.customErrorResponse(response, 404, 'Create User Failed!')
+        }
     }
 }
