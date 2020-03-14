@@ -5,14 +5,14 @@ const Route = express.Router();
 
 const {
     createSubcity,
-    //      readSubcity,
+    readSubcity,
     //      updateSubcity
     //      deleteSubcity
 } = require("../controllers/sub_city");
 
 Route
     .post("/", createSubcity)
-    .get("/")
+    .get("/", readSubcity)
     .patch("/")
     .delete("/")
 

@@ -15,10 +15,19 @@ module.exports = {
             }
 
             const result = await subcityModel.createSubcity(data)
-            await funcHelpers.response(response, 200, result)
+            funcHelpers.response(response, 200, result)
         } catch (error) {
             console.log(error)
             funcHelpers.cumstomErrorResponse(response, 404, "Create Sub-City Failed!");
+        }
+    },
+    readSubcity: async (request, response) => {
+        try {
+            const result = await subcityModel.readSubcity()
+            funcHelpers.response(response, 200, result)
+        } catch (error) {
+            console.log(error)
+            funcHelpers.cumstomErrorResponse(response, 404, "Read Sub-City Failed!");
         }
     }
 }
