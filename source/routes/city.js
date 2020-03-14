@@ -7,13 +7,13 @@ const {
     createCity,
     readCity,
     updateCity,
-    // deleteCity
+    deleteCity
 } = require('../controllers/city')
 
 Route
     .post('/', createCity)
     .get('/', readCity)
     .patch('/:cityId', updateCity)
-// .delete('/:cityId', deleteCity)
+    .delete('/:cityId', deleteCity)
 
 module.exports = Route
