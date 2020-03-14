@@ -1,7 +1,7 @@
 const express = require('express')
 const Route = express.Router()
 
-// const { authentication, authorization } = require("../helpers/auth");
+const { authentication, authorization } = require("../helpers/auth");
 
 const {
     createProvince,
@@ -11,9 +11,9 @@ const {
 } = require('../controllers/province')
 
 Route
-    .post('/', createProvince)
-    .get('/', readProvince)
-    .patch('/:provinceId', updateProvince)
-    .delete('/:provinceId', deleteProvince)
+    .post('/', authentication, authorization, createProvince)
+    .get('/', authentication, authorization, readProvince)
+    .patch('/:provinceId', authentication, authorization, updateProvince)
+    .delete('/:provinceId', authentication, authorization, deleteProvince)
 
 module.exports = Route

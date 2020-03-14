@@ -1,7 +1,7 @@
 const express = require("express");
 const Route = express.Router();
 
-// const { authentication, authorization } = require("../helpers/auth");
+const { authentication, authorization } = require("../helpers/auth");
 
 const {
     createSubcity,
@@ -11,9 +11,9 @@ const {
 } = require("../controllers/sub_city");
 
 Route
-    .post("/", createSubcity)
-    .get("/", readSubcity)
-    .patch("/:subcityId", updateSubcity)
-    .delete("/:subcityId", deleteSubcity)
+    .post("/", authentication, authorization, createSubcity)
+    .get("/", authentication, authorization, readSubcity)
+    .patch("/:subcityId", authentication, authorization, updateSubcity)
+    .delete("/:subcityId", authentication, authorization, deleteSubcity)
 
 module.exports = Route;

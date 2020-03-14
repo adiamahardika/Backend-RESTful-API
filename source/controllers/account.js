@@ -4,7 +4,6 @@ const JWT = require('jsonwebtoken')
 const {
     JWT_KEY
 } = require('../configs/mysql')
-const bcrypt = require('bcryptjs');
 
 module.exports = {
     createAccount: async (request, response) => {
