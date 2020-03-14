@@ -13,6 +13,6 @@ Route
     .use('/category/', categoryRouter)
     .use('/purchase/', purchaseRouter)
     .use('/upload', express.static('./upload'))
-    .use('/province', provinceRouter)
+    .use('/province/', provinceRouter)
 
 module.exports = Route
