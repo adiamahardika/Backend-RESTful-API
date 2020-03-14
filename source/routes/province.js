@@ -12,9 +12,9 @@ const {
 
 Route
     .post('/', createProvince)
-    .get('/',)
-    .get('/:provinceName', )
-    .patch('/:provinceId', )
-    .delete('/:provinceId',)
+    .get('/')
+    .get('/:provinceName')
+    .patch('/:provinceId')
+    .delete('/:provinceId')
 
 module.exports = Route
