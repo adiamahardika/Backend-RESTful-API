@@ -6,21 +6,14 @@ const Route = express.Router()
 const {
     createProvince,
     readProvince,
-    // updateCategory,
+    updateProvince,
     // deleteCategory
 } = require('../controllers/province')
 
 Route
     .post('/', createProvince)
-<<<<<<< HEAD
-    .get('/')
-    .get('/:provinceName')
-    .patch('/:provinceId')
-    .delete('/:provinceId')
-=======
     .get('/', readProvince)
-    .patch('/:provinceId', )
+    .patch('/:provinceId', updateProvince)
     .delete('/:provinceId',)
->>>>>>> province
 
 module.exports = Route
