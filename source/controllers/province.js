@@ -15,5 +15,13 @@ module.exports = {
         } catch (error) {
             funcHelpers.customErrorResponse(response, 404, 'Cannot Create Provice!')
         }
+    },
+    readProvince: async (request, response) => {
+        try {
+            const result = await provinceModel.readProvince()
+            funcHelpers.response(response, 200, result)
+        } catch (error) {
+            funcHelpers.customErrorResponse(response, 404, 'Cannot Read Province!')
+        }
     }
 }
