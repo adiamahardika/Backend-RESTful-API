@@ -15,12 +15,8 @@ Route
     .use('/category/', categoryRouter)
     .use('/purchase/', purchaseRouter)
     .use('/upload', express.static('./upload'))
-<<<<<<< HEAD
     .use('/province', provinceRouter)
     .use('/city/', cityRouter)
     .use('/subcity/', subcityRouter)
-=======
-    .use('/province/', provinceRouter)
->>>>>>> province
 
 module.exports = Route
