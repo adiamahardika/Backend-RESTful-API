@@ -10,5 +10,13 @@ module.exports = {
                 resolve(result)
             })
         })
+    },
+    readCity: () => {
+        return new Promise((resolve, reject) => {
+            connection.query('SELECT city.*, province.name_province FROM city INNER JOIN province ON city.id_province = province.id', (error, result) => {
+                if (error) reject(new Error(error))
+                resolve(result)
+            })
+        })
     }
 }
