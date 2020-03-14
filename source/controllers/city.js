@@ -42,5 +42,15 @@ module.exports = {
         } catch (error) {
             funcHelpers.customErrorResponse(response, 404, 'Cannot Update City!')
         }
+    },
+    deleteCity: async (request, response) => {
+        try {
+            const data = request.params.cityId
+            const result = await cityModel.deleteCity(data)
+            funcHelpers.response(response, 200, result)
+        } catch (error) {
+            console.log(error)
+            funcHelpers.cumstomErrorResponse(response, 404, 'Delete Account Failed!')
+        }
     }
 }
