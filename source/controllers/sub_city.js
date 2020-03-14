@@ -48,4 +48,13 @@ module.exports = {
             funcHelpers.customErrorResponse(response, 404, 'Update SubCity Failed!')
         }
     },
+    deleteSubcity: async (request, response) => {
+        try {
+            const data = request.params.subcityId
+            const result = await subcityModel.deleteSubcity(data)
+            funcHelpers.response(response, 200, result)
+        } catch (error) {
+            funcHelpers.customErrorResponse(response, 404, 'Delete SubCity Failed!')
+        }
+    }
 }

@@ -27,5 +27,16 @@ module.exports = {
                 resolve(result)
             })
         })
+    },
+    deleteSubcity: (data) => {
+        return new Promise((resolve, reject) => {
+            connection.query(`DELETE FROM sub_city WHERE id = ?`, data)
+            connection.query(`SELECT * FROM sub_city`, (error, result) => {
+                if (error) reject(new Error(error))
+                connection.query(`ALTER TABLE sub_city DROP id`)
+                connection.query(`ALTER TABLE sub_city ADD id INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST`)
+                resolve(result)
+            })
+        })
     }
 }
