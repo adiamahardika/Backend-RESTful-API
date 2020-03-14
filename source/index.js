@@ -14,9 +14,9 @@ Route
     .use('/product/', productRouter)
     .use('/category/', categoryRouter)
     .use('/purchase/', purchaseRouter)
-    .use('/subcity/', subcityRouter)
     .use('/upload', express.static('./upload'))
     .use('/province', provinceRouter)
     .use('/city/', cityRouter)
+    .use('/subcity/', subcityRouter)
 
 module.exports = Route
