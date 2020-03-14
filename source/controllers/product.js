@@ -7,7 +7,9 @@ module.exports = {
         try {
             const {
                 name_product,
-                description,
+                cartDesc,
+                shortDesc,
+                longDesc,
                 ingredients,
                 quantity,
                 price,
@@ -17,7 +19,9 @@ module.exports = {
             const data = {
                 name_product,
                 image: `${url}upload/${request.file.filename}`,
-                description,
+                cartDesc,
+                shortDesc,
+                longDesc,
                 ingredients,
                 quantity,
                 price,
@@ -71,7 +75,9 @@ module.exports = {
                 const id = request.params.productId;
                 const {
                     name_product,
-                    description,
+                    cartDesc,
+                    shortDesc,
+                    longDesc,
                     ingredients,
                     quantity,
                     price,
@@ -81,7 +87,9 @@ module.exports = {
                 const data = {
                     id,
                     name_product,
-                    description,
+                    cartDesc,
+                    shortDesc,
+                    longDesc,
                     ingredients,
                     quantity,
                     price,
@@ -96,7 +104,9 @@ module.exports = {
             const id = request.params.productId;
             const {
                 name_product,
-                description,
+                cartDesc,
+                shortDesc,
+                longDesc,
                 ingredients,
                 quantity,
                 price,
@@ -107,7 +117,9 @@ module.exports = {
                 id,
                 name_product,
                 image: `${url}upload/${request.file.filename}`,
-                description,
+                cartDesc,
+                shortDesc,
+                longDesc,
                 ingredients,
                 quantity,
                 price,
