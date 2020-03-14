@@ -4,28 +4,69 @@ const JWT = require('jsonwebtoken')
 const {
     JWT_KEY
 } = require('../configs/mysql')
-
+const bcrypt = require('bcryptjs');
 
 module.exports = {
     createAccount: async (request, response) => {
         try {
             const salt = funcHelpers.generateSalt(18)
             const hashPassword = funcHelpers.setPassword(request.body.password, salt)
+            if (!request.file || Object.keys(request.file).length === 0) {
+                const {
+                    email,
+                    first_name,
+                    last_name,
+                    city,
+                    country,
+                    address,
+                    no_telephone,
+                } = request.body
+
+                const data = {
+                    email,
+                    first_name,
+                    last_name,
+                    password: hashPassword.passwordHash,
+                    city,
+                    country,
+                    address,
+                    no_telephone,
+                    salt: hashPassword.salt,
+                    role: request.body.role || 'member',
+                    date_added: new Date(),
+                    date_updated: new Date()
+                }
+                const result = await accountModel.createAccount(data)
+                return funcHelpers.response(response, 200, result)
+            }
+
+            const {
+                email,
+                first_name,
+                last_name,
+                city,
+                country,
+                address,
+                no_telephone,
+            } = request.body
 
             const data = {
-                //id: request.body.id,
-                name: request.body.name,
-                image: `http://localhost:4111/upload/${request.file.filename}`,
-                no_telephone: request.body.no_telephone,
-                email: request.body.email,
+                email,
+                first_name,
+                last_name,
                 password: hashPassword.passwordHash,
+                city,
+                country,
+                address,
+                no_telephone,
+                image: `http://localhost:4111/upload/${request.file.filename}`,
                 salt: hashPassword.salt,
                 role: request.body.role || 'member',
                 date_added: new Date(),
                 date_updated: new Date()
             }
             const result = await accountModel.createAccount(data)
-            funcHelpers.response(response, 200, result)
+            return funcHelpers.response(response, 200, result)
         } catch (error) {
             console.log(error)
             funcHelpers.cumstomErrorResponse(response, 404, 'Create Account Failed!')
@@ -47,20 +88,27 @@ module.exports = {
             if (!request.file || Object.keys(request.file).length === 0) {
                 const id = request.params.accountId;
                 const {
-                    name,
-                    no_telephone,
                     email,
-                    role
+                    first_name,
+                    last_name,
+                    city,
+                    country,
+                    address,
+                    no_telephone,
                 } = request.body;
 
                 const data = {
                     id,
-                    name,
-                    no_telephone,
                     email,
+                    first_name,
+                    last_name,
                     password: hashPassword.passwordHash,
+                    city,
+                    country,
+                    address,
+                    no_telephone,
                     salt: hashPassword.salt,
-                    role,
+                    role: request.body.role || 'member',
                     date_updated: new Date()
                 };
 
@@ -70,21 +118,28 @@ module.exports = {
 
             const id = request.params.accountId;
             const {
-                name,
-                no_telephone,
                 email,
-                role
+                first_name,
+                last_name,
+                city,
+                country,
+                address,
+                no_telephone,
             } = request.body;
 
             const data = {
                 id,
-                name,
+                email,
+                first_name,
+                last_name,
+                password: hashPassword.passwordHash,
+                city,
+                country,
+                address,
                 no_telephone,
                 image: `http://localhost:4111/upload/${request.file.filename}`,
-                email,
-                password: hashPassword.passwordHash,
                 salt: hashPassword.salt,
-                role,
+                role: request.body.role || 'member',
                 date_updated: new Date()
             };
 
@@ -105,32 +160,37 @@ module.exports = {
             funcHelpers.cumstomErrorResponse(response, 404, 'Delete Account Failed!')
         }
     },
-    login: async (request, response) => {
-        const data = {
-            password: request.body.password,
-            email: request.body.email
-        }
+    login: async (request, response, next) => {
+        try {
+            const data = {
+                email: request.body.email,
+                password: request.body.password
+            }
 
-        const emailValid = await accountModel.checkEmail(data.email)
-        const dataUser = emailValid[0]
-        const hashPassword = funcHelpers.setPassword(data.password, dataUser.salt)
+            const result = await accountModel.readAccount()
+            const dataAccount = result[0]
+            const hashPassword = funcHelpers.setPassword(data.password, dataAccount.salt)
 
-        if (hashPassword.passwordHash === dataUser.password) {
-            const token = JWT.sign({
-                email: dataUser.email,
-                id: dataUser.id
-            }, JWT_KEY, {
-                expiresIn: '1d'
-            })
+            if (hashPassword.passwordHash === dataAccount.password && data.email === dataAccount.email) {
+                const token = JWT.sign({
+                    email: dataAccount.email,
+                    id: dataAccount.id
+                }, JWT_KEY, {
+                    expiresIn: '30m'
+                })
 
-            delete dataUser.salt
-            delete dataUser.password
+                delete dataAccount.salt
+                delete dataAccount.password
 
-            dataUser.token = token
+                dataAccount.token = token
 
-            funcHelpers.response(response, 200, dataUser)
-        } else {
-            funcHelpers.cumstomErrorResponse(response, 404, 'Login Account Failed!')
+                return funcHelpers.response(response, 200, dataAccount)
+            } else {
+                return funcHelpers.accountErrorResponse(response, 404, 'Email or Password is Wrong!')
+            }
+        } catch (error) {
+            console.log(error)
+            funcHelpers.accountErrorResponse(response, 404, 'Login Account Failed!')
         }
     }
 }

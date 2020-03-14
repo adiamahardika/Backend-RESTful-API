@@ -47,9 +47,9 @@ module.exports = {
             })
         })
     },
-    checkName: (name) => {
+    checkPassword: (password) => {
         return new Promise((resolve, reject) => {
-            connection.query('SELECT * FROM account WHERE name = ?', name, (error, result) => {
+            connection.query('SELECT * FROM account WHERE password = ?', password, (error, result) => {
                 if (error) reject(new Error(error))
                 resolve(result)
             })
