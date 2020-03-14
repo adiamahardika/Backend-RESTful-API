@@ -15,7 +15,7 @@ Route
     .use('/category/', categoryRouter)
     .use('/purchase/', purchaseRouter)
     .use('/upload', express.static('./upload'))
-    .use('/province/', provinceRouter)
+    .use('/province', provinceRouter)
     .use('/city/', cityRouter)
     .use('/subcity/', subcityRouter)
 
