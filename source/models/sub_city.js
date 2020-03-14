@@ -18,5 +18,14 @@ module.exports = {
                 resolve(result)
             })
         })
+    },
+    updateSubcity: (data) => {
+        return new Promise((resolve, reject) => {
+            connection.query(`UPDATE sub_city SET ? WHERE id = ?`, [data, data.id])
+            connection.query('SELECT sub_city.*, city.name_city FROM sub_city INNER JOIN city ON sub_city.id_city = city.id', (error, result) => {
+                if (error) reject(new Error(error))
+                resolve(result)
+            })
+        })
     }
 }

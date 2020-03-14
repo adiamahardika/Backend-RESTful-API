@@ -29,5 +29,23 @@ module.exports = {
             console.log(error)
             funcHelpers.cumstomErrorResponse(response, 404, "Read Sub-City Failed!");
         }
-    }
+    },
+    updateSubcity: async (request, response) => {
+        try {
+            const id = request.params.subcityId
+            const {
+                name_sub_city,
+                id_city
+            } = request.body
+            const data = {
+                id,
+                name_sub_city,
+                id_city
+            }
+            const result = await subcityModel.updateSubcity(data)
+            funcHelpers.response(response, 200, result)
+        } catch (error) {
+            funcHelpers.customErrorResponse(response, 404, 'Update SubCity Failed!')
+        }
+    },
 }
