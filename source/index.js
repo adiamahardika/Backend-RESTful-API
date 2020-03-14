@@ -6,6 +6,7 @@ const productRouter = require('./routes/product')
 const categoryRouter = require('./routes/category')
 const purchaseRouter = require('./routes/purchase')
 const provinceRouter = require('./routes/province')
+const cityRouter = require('./routes/city')
 
 Route
     .use('/account/', accountRouter)
@@ -14,5 +15,6 @@ Route
     .use('/purchase/', purchaseRouter)
     .use('/upload', express.static('./upload'))
     .use('/province', provinceRouter)
+    .use('/city/', cityRouter)
 
 module.exports = Route
