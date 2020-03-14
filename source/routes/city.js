@@ -6,15 +6,14 @@ const Route = express.Router()
 const {
     createCity,
     readCity,
-    // updateCity,
+    updateCity,
     // deleteCity
 } = require('../controllers/city')
 
 Route
     .post('/', createCity)
     .get('/', readCity)
-// .get('/:cityId', updateCity)
-// .patch('/:cityId', updateCity)
+    .patch('/:cityId', updateCity)
 // .delete('/:cityId', deleteCity)
 
 module.exports = Route

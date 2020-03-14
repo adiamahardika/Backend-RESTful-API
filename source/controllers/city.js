@@ -24,5 +24,23 @@ module.exports = {
             console.log(error)
             funcHelpers.customErrorResponse(response, 404, 'Create City Failed!')
         }
+    },
+    updateCity: async (request, response) => {
+        try {
+            const id = request.params.cityId
+            const {
+                name_city,
+                id_province
+            } = request.body
+            const data = {
+                id,
+                name_city,
+                id_province
+            }
+            const result = await cityModel.updateCity(data)
+            funcHelpers.response(response, 200, result)
+        } catch (error) {
+            funcHelpers.customErrorResponse(response, 404, 'Cannot Update City!')
+        }
     }
 }
