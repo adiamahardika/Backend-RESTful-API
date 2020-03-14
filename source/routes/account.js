@@ -1,7 +1,7 @@
 const express = require('express')
 const Route = express.Router()
 
-// const { authentication, authorization } = require("../helpers/auth");
+const { authentication, authorization } = require("../helpers/auth");
 
 const {
     createAccount,
@@ -15,9 +15,9 @@ const { uploadImages } = require("../controllers/upload");
 
 Route
     .post('/', uploadImages, createAccount)
-    .get('/', readAccount)
-    .patch('/:accountId', uploadImages, updateAccount)
-    .delete('/:accountId', deleteAccount)
+    .get('/', authentication, authorization, readAccount)
+    .patch('/:accountId', authentication, authorization, uploadImages, updateAccount)
+    .delete('/:accountId', authentication, authorization, deleteAccount)
     .post('/login', login)
 
 module.exports = Route
