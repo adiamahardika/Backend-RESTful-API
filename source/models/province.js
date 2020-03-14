@@ -11,4 +11,12 @@ module.exports = {
             })
         })
     },
+    readProvince: () => {
+        return new Promise((resolve, reject) => {
+            connection.query(`SELECT * FROM province`, (error, result) => {
+                if (error) reject( new Error (error))
+                resolve(result)
+            })
+        })
+    }
 }
