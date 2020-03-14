@@ -39,5 +39,14 @@ module.exports = {
         } catch (error) {
             funcHelpers.customErrorResponse(response, 404, 'Cannot Update Province')
         }
+    },
+    deleteProvince: async (request, response) => {
+        try {
+            const data = request.params.provinceId
+            const result = await provinceModel.deleteProvince(data)
+            funcHelpers.response(response, 200, result)
+        } catch (error) {
+            funcHelpers.customErrorResponse(response, 404, 'Cannot Delete Province!')
+        }
     }
 }

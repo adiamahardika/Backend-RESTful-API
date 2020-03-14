@@ -7,13 +7,13 @@ const {
     createProvince,
     readProvince,
     updateProvince,
-    // deleteCategory
+    deleteProvince
 } = require('../controllers/province')
 
 Route
     .post('/', createProvince)
     .get('/', readProvince)
     .patch('/:provinceId', updateProvince)
-    .delete('/:provinceId',)
+    .delete('/:provinceId', deleteProvince)
 
 module.exports = Route
