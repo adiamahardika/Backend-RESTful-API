@@ -46,6 +46,7 @@ module.exports = {
 
             const product = request.query.product || ''
             const category = request.query.category || ''
+            const group = request.query.group || ''
 
             const sortBy = request.query.sortBy || 'id'
             const orderBy = request.query.orderBy || 'ASC'
@@ -58,8 +59,8 @@ module.exports = {
                 orderBy,
             }
 
-            const result = await productModel.readProduct(product, category, data)
-            const totalData = await productModel.countProduct(product, category)
+            const result = await productModel.readProduct(product, category, group, data)
+            const totalData = await productModel.countProduct(product, category, group)
             const amount = Math.ceil(totalData / limit)
             const paginateTab = { amount }
 
