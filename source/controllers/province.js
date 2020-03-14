@@ -3,10 +3,10 @@ const funcHelpers = require("../helpers");
 
 module.exports = {
     createProvince: async (request, response) => {
-        try { 
+        try {
             const {
-            name_province 
-        } = request.body
+                name_province
+            } = request.body
             const data = {
                 name_province
             }
@@ -31,7 +31,7 @@ module.exports = {
                 name_province
             } = request.body
             const data = {
-                id, 
+                id,
                 name_province
             }
             const result = await provinceModel.updateProvince(data)

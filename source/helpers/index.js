@@ -44,5 +44,13 @@ module.exports = {
         result.message = message
 
         return response.status(result.status).json(result)
-    }
+    },
+    accountErrorResponse: (response, status, message) => {
+        const result = {}
+
+        result.status = status || 400
+        result.message = message
+
+        return response.status(result.status).json(result)
+    },
 }

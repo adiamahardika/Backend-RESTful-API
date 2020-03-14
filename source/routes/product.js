@@ -1,7 +1,7 @@
 const express = require("express");
 const Route = express.Router();
 
-// const { authentication, authorization } = require("../helpers/auth");
+const { authentication, authorization } = require("../helpers/auth");
 
 const {
     createProduct,
@@ -14,7 +14,7 @@ const { uploadImages } = require("../controllers/upload");
 
 Route
     .post("/", uploadImages, createProduct)
-    .get("/", readProduct)
+    .get("/", authentication, authorization, readProduct)
     .get("/:productId", readProduct)
     .patch("/:productId", uploadImages, updateProduct)
     .delete("/:productId", deleteProduct)
