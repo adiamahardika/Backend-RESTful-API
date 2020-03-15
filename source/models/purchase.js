@@ -48,12 +48,19 @@ module.exports = {
             })
         })
     },
-    readPurchase: () => {
+    readPurchase: (purchaseId) => {
         return new Promise((resolve, reject) => {
-            connection.query("SELECT * FROM purchase", (error, result) => {
-                if (error) reject(new Error(error))
-                resolve(result)
-            })
+            if (purchaseId != null) {
+                connection.query("SELECT purchase.*, purchase_detail.id_product, account.first_name, province.name_province, city.name_city, sub_city.name_sub_city, product.name_product FROM purchase INNER JOIN purchase_detail ON purchase.id = purchase_detail.id_purchase LEFT JOIN product ON product.id = purchase_detail.id_product INNER JOIN account ON account.id = purchase.id_account INNER JOIN province ON province.id = purchase.id_province INNER JOIN city ON city.id = purchase.id_city INNER JOIN sub_city ON sub_city.id = purchase.id_sub_city WHERE purchase.id = ?", purchaseId, (error, result) => {
+                    if (error) reject(new Error(error))
+                    resolve(result)
+                })
+            } else {
+                connection.query("SELECT purchase.*, purchase_detail.id_product, account.first_name, province.name_province, city.name_city, sub_city.name_sub_city, product.name_product FROM purchase INNER JOIN purchase_detail ON purchase.id = purchase_detail.id_purchase LEFT JOIN product ON product.id = purchase_detail.id_product INNER JOIN account ON account.id = purchase.id_account INNER JOIN province ON province.id = purchase.id_province INNER JOIN city ON city.id = purchase.id_city INNER JOIN sub_city ON sub_city.id = purchase.id_sub_city", (error, result) => {
+                    if (error) reject(new Error(error))
+                    resolve(result)
+                })
+            }
         })
     }
 }
