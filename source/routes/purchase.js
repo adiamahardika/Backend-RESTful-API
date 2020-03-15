@@ -3,13 +3,13 @@ const Route = express.Router();
 
 // const { authentication, authorization } = require("../helpers/auth");
 
-// const {
-//      readPurchase,
-//      purchaseProduct
-// } = require("../controllers/purchase");
+const {
+    readPurchase,
+    purchase
+} = require("../controllers/purchase");
 
 Route
-    .get("/")
-    .post("/")
+    .get("/", readPurchase)
+    .post("/", purchase)
 
 module.exports = Route;
