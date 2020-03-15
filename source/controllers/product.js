@@ -13,7 +13,8 @@ module.exports = {
                 ingredients,
                 quantity,
                 price,
-                id_category
+                id_category,
+                id_product_group
             } = request.body;
 
             const data = {
@@ -26,6 +27,7 @@ module.exports = {
                 quantity,
                 price,
                 id_category,
+                id_product_group,
                 date_added: new Date(),
                 date_updated: new Date()
             };
@@ -82,7 +84,8 @@ module.exports = {
                     ingredients,
                     quantity,
                     price,
-                    id_category
+                    id_category,
+                    id_product_group
                 } = request.body;
 
                 const data = {
@@ -95,6 +98,7 @@ module.exports = {
                     quantity,
                     price,
                     id_category,
+                    id_product_group,
                     date_updated: new Date()
                 };
 
@@ -111,7 +115,8 @@ module.exports = {
                 ingredients,
                 quantity,
                 price,
-                id_category
+                id_category,
+                id_product_group
             } = request.body;
 
             const data = {
@@ -125,6 +130,7 @@ module.exports = {
                 quantity,
                 price,
                 id_category,
+                id_product_group,
                 date_updated: new Date()
             };
 
