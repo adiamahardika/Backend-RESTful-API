@@ -60,7 +60,8 @@ module.exports = {
     },
     readPurchase: async (request, response) => {
         try {
-            const result = await purchaseModel.readPurchase()
+            const purchaseId = request.params.purchaseId
+            const result = await purchaseModel.readPurchase(purchaseId)
             funcHelpers.response(response, 200, result)
         } catch (error) {
             console.log(error)
