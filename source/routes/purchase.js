@@ -10,6 +10,7 @@ const {
 
 Route
     .get("/", readPurchase)
+    .get("/:purchaseId", readPurchase)
     .post("/", purchase)
 
 module.exports = Route;
