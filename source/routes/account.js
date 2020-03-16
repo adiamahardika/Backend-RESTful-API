@@ -8,16 +8,18 @@ const {
     readAccount,
     updateAccount,
     deleteAccount,
-    login
+    login,
+    changePassword
 } = require('../controllers/account')
 
 const { uploadImages } = require("../controllers/upload");
 
 Route
     .post('/', uploadImages, createAccount)
-    .get('/', authentication, authorization, readAccount)
-    .patch('/:accountId', authentication, authorization, uploadImages, updateAccount)
-    .delete('/:accountId', authentication, authorization, deleteAccount)
+    .get('/', readAccount)
+    .patch('/:accountId', uploadImages, updateAccount)
+    .patch('/password/:accountId', changePassword)
+    .delete('/:accountId', deleteAccount)
     .post('/login', login)
 
 module.exports = Route
