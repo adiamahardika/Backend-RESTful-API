@@ -7,25 +7,27 @@ module.exports = {
         try {
             const {
                 name_product,
-                cartDesc,
-                shortDesc,
-                longDesc,
-                ingredients,
-                quantity,
-                price,
-                id_category
-            } = request.body;
-
-            const data = {
-                name_product,
-                image: `${url}upload/${request.file.filename}`,
-                cartDesc,
+                cardDesc,
                 shortDesc,
                 longDesc,
                 ingredients,
                 quantity,
                 price,
                 id_category,
+                id_product_group
+            } = request.body;
+
+            const data = {
+                name_product,
+                image: `${url}upload/${request.file.filename}`,
+                cardDesc,
+                shortDesc,
+                longDesc,
+                ingredients,
+                quantity,
+                price,
+                id_category,
+                id_product_group,
                 date_added: new Date(),
                 date_updated: new Date()
             };
@@ -76,7 +78,7 @@ module.exports = {
                 const id = request.params.productId;
                 const {
                     name_product,
-                    cartDesc,
+                    cardDesc,
                     shortDesc,
                     longDesc,
                     ingredients,
@@ -88,7 +90,7 @@ module.exports = {
                 const data = {
                     id,
                     name_product,
-                    cartDesc,
+                    cardDesc,
                     shortDesc,
                     longDesc,
                     ingredients,
@@ -105,7 +107,7 @@ module.exports = {
             const id = request.params.productId;
             const {
                 name_product,
-                cartDesc,
+                cardDesc,
                 shortDesc,
                 longDesc,
                 ingredients,
@@ -118,7 +120,7 @@ module.exports = {
                 id,
                 name_product,
                 image: `${url}upload/${request.file.filename}`,
-                cartDesc,
+                cardDesc,
                 shortDesc,
                 longDesc,
                 ingredients,
