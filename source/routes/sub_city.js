@@ -11,9 +11,9 @@ const {
 } = require("../controllers/sub_city");
 
 Route
-    .post("/", authentication, authorization, createSubcity)
-    .get("/", authentication, authorization, readSubcity)
-    .patch("/:subcityId", authentication, authorization, updateSubcity)
-    .delete("/:subcityId", authentication, authorization, deleteSubcity)
+    .post("/", createSubcity)
+    .get("/", readSubcity)
+    .patch("/:subcityId", updateSubcity)
+    .delete("/:subcityId", deleteSubcity)
 
 module.exports = Route;

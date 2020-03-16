@@ -11,10 +11,10 @@ const {
 } = require('../controllers/category')
 
 Route
-    .post('/', authentication, authorization, createCategory)
-    .get('/', authentication, authorization, readCategory)
-    .get('/:categoryName', authentication, authorization, readCategory)
-    .patch('/:categoryId', authentication, authorization, updateCategory)
-    .delete('/:categoryId', authentication, authorization, deleteCategory)
+    .post('/', createCategory)
+    .get('/', readCategory)
+    .get('/:categoryName', readCategory)
+    .patch('/:categoryId', updateCategory)
+    .delete('/:categoryId', deleteCategory)
 
 module.exports = Route
