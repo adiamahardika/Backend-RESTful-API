@@ -11,9 +11,9 @@ const {
 } = require('../controllers/province')
 
 Route
-    .post('/', authentication, authorization, createProvince)
-    .get('/', authentication, authorization, readProvince)
-    .patch('/:provinceId', authentication, authorization, updateProvince)
-    .delete('/:provinceId', authentication, authorization, deleteProvince)
+    .post('/', createProvince)
+    .get('/', readProvince)
+    .patch('/:provinceId', updateProvince)
+    .delete('/:provinceId', deleteProvince)
 
 module.exports = Route

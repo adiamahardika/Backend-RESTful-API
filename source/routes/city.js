@@ -11,9 +11,9 @@ const {
 } = require('../controllers/city')
 
 Route
-    .post('/', authentication, authorization, createCity)
-    .get('/', authentication, authorization, readCity)
-    .patch('/:cityId', authentication, authorization, updateCity)
-    .delete('/:cityId', authentication, authorization, deleteCity)
+    .post('/', createCity)
+    .get('/', readCity)
+    .patch('/:cityId', updateCity)
+    .delete('/:cityId', deleteCity)
 
 module.exports = Route

@@ -5,6 +5,37 @@ const { url } = require("../configs/mysql");
 module.exports = {
     createProduct: async (request, response) => {
         try {
+            if (!request.file || Object.keys(request.file).length === 0) {
+                const {
+                    name_product,
+                    cardDesc,
+                    shortDesc,
+                    longDesc,
+                    ingredients,
+                    quantity,
+                    price,
+                    id_category,
+                    id_product_group
+                } = request.body;
+
+                const data = {
+                    name_product,
+                    cardDesc,
+                    shortDesc,
+                    longDesc,
+                    ingredients,
+                    quantity,
+                    price,
+                    id_category,
+                    id_product_group,
+                    date_added: new Date(),
+                    date_updated: new Date()
+                };
+
+                const result = await productModel.createProduct(data);
+                return funcHelpers.response(response, 200, result);
+            }
+
             const {
                 name_product,
                 cardDesc,
@@ -44,7 +75,7 @@ module.exports = {
             const productId = request.params.productId
 
             const paginateId = request.query.paginateId || 1
-            const limit = request.query.limit || 20
+            const limit = request.query.limit || 10
 
             const product = request.query.product || ''
             const category = request.query.category || ''
@@ -61,8 +92,8 @@ module.exports = {
                 orderBy,
             }
 
-            const result = await productModel.readProduct(product, category, group, data)
-            const totalData = await productModel.countProduct(product, category, group)
+            const result = await productModel.readProduct(group, product, category, data)
+            const totalData = await productModel.countProduct(group, product, category)
             const amount = Math.ceil(totalData / limit)
             const paginateTab = { amount }
 
