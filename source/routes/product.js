@@ -13,10 +13,10 @@ const {
 const { uploadImages } = require("../controllers/upload");
 
 Route
-    .post("/", authentication, authorization, uploadImages, createProduct)
-    .get("/", authentication, authorization, readProduct)
-    .get("/:productId", authentication, authorization, readProduct)
-    .patch("/:productId", authentication, authorization, uploadImages, updateProduct)
-    .delete("/:productId", authentication, authorization, deleteProduct)
+    .post("/", uploadImages, createProduct)
+    .get("/", readProduct)
+    .get("/:productId", readProduct)
+    .patch("/:productId", uploadImages, updateProduct)
+    .delete("/:productId", deleteProduct)
 
 module.exports = Route;

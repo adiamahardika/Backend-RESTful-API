@@ -31,7 +31,7 @@ module.exports = {
                 date_added: new Date(),
                 date_updated: new Date()
             };
-
+            // console.log(data)
             const result = await productModel.createProduct(data);
             funcHelpers.response(response, 200, result);
         } catch (error) {
@@ -44,7 +44,7 @@ module.exports = {
             const productId = request.params.productId
 
             const paginateId = request.query.paginateId || 1
-            const limit = request.query.limit || 6
+            const limit = request.query.limit || 20
 
             const product = request.query.product || ''
             const category = request.query.category || ''
