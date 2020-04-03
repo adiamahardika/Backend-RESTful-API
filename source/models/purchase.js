@@ -1,10 +1,9 @@
 const connection = require('../configs/database')
 
 module.exports = {
-    purchase: (data, loop) => {
+    purchase: (id_purchase, data, loop) => {
         return new Promise((resolve, reject) => {
             /* purchase */
-            const id_purchase = data.id_purchase
             const id_account = data.id_account
             const name_reciver = data.name_reciver
             const email = data.email
@@ -13,10 +12,10 @@ module.exports = {
             const id_city = data.id_city
             const id_sub_city = data.id_sub_city
             const address = data.address
+            const codepos = data.codepos
             const fax = data.fax
             const tax = data.tax
-            const shipping = data.shipping
-            const shipped = data.shipped
+            const arrived = data.arrived
             const total = data.total
             const tracking = data.tracking
             const date = data.date
@@ -33,7 +32,7 @@ module.exports = {
                     let checkProductId = result[0].id
                     // ==========================================
                     if (checkQuantity >= 0) {
-                        if (loop == 0) { connection.query("INSERT INTO purchase (id, id_account, name_reciver, email, no_telephone, id_province, id_city, id_sub_city, address, fax, tax, shipping, shipped, total, tracking, date) VALUES ('" + id_purchase + "', '" + id_account + "', '" + name_reciver + "', '" + email + "', '" + no_telephone + "', '" + id_province + "', '" + id_city + "', '" + id_sub_city + "', '" + address + "', '" + fax + "', '" + tax + "', '" + shipping + "', '" + shipped + "', '" + total + "', '" + tracking + "', '" + date + "')") }
+                        if (loop == 0) { connection.query("INSERT INTO purchase (id, id_account, name_reciver, email, no_telephone, id_province, id_city, id_sub_city, address, codepos, fax, tax, arrived, total, tracking, date) VALUES ('" + id_purchase + "', '" + id_account + "', '" + name_reciver + "', '" + email + "', '" + no_telephone + "', '" + id_province + "', '" + id_city + "', '" + id_sub_city + "', '" + address + "', '" + codepos + "', '" + fax + "', '" + tax + "', '" + arrived + "', '" + total + "', '" + tracking + "', '" + date + "')") }
                         connection.query("UPDATE product SET quantity = ? WHERE id = ?", [checkQuantity, checkProductId])
                         connection.query('ALTER TABLE purchase_detail AUTO_INCREMENT = 0')
                         connection.query("INSERT INTO purchase_detail (id_purchase, id_product, quantity) VALUES ('" + id_purchase + "', '" + id_product + "', '" + quantity + "')")
