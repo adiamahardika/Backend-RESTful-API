@@ -144,7 +144,7 @@ module.exports = {
                 id_sub_city,
                 address,
                 no_telephone,
-                image: `http://localhost:4111/upload/${request.file.filename}`,
+                image: `${url}upload/${request.file.filename}`,
                 role: request.body.role || 'member',
                 date_updated: new Date()
             };
@@ -186,9 +186,6 @@ module.exports = {
                     expiresIn: '30m'
                 })
 
-                delete dataAccount.id_province
-                delete dataAccount.id_city
-                delete dataAccount.id_sub_city
                 delete dataAccount.salt
                 delete dataAccount.password
 

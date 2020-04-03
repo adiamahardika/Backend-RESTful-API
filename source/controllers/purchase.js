@@ -1,6 +1,7 @@
 const purchaseModel = require("../models/purchase");
 const funcHelpers = require("../helpers");
 const { performance } = require('perf_hooks');
+const uuidv4 = require('uuid/v4')
 
 module.exports = {
     purchase: async (request, response) => {
@@ -24,11 +25,11 @@ module.exports = {
                 });
             }
 
+            const id_purchase = uuidv4()
             await purchaseING.product.map(event => {
                 const tracking = trackingUUID()
                 const data = {
                     /* purchase */
-                    id_purchase: purchaseING.id_purchase,
                     id_account: purchaseING.id_account,
                     name_reciver: purchaseING.name_reciver,
                     email: purchaseING.email,
@@ -37,18 +38,18 @@ module.exports = {
                     id_city: purchaseING.id_city,
                     id_sub_city: purchaseING.id_sub_city,
                     address: purchaseING.address,
+                    codepos: purchaseING.codepos,
                     fax: purchaseING.fax,
                     tax: purchaseING.tax,
-                    shipping: purchaseING.shipping,
-                    shipped: purchaseING.shipped,
+                    arrived: purchaseING.arrived,
                     total: purchaseING.total,
                     tracking,
                     date: new Date(),
                     /* purchase detail */
-                    id_product: event.id_product,
-                    quantity: event.quantity
+                    id_product: event.id,
+                    quantity: event.qty
                 }
-                purchaseModel.purchase(data, loop)
+                purchaseModel.purchase(id_purchase, data, loop)
                 loop++
             })
             const result = await purchaseModel.readPurchase()
