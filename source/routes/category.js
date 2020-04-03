@@ -1,21 +1,20 @@
 const express = require('express')
 const Route = express.Router()
 
-// const { authentication, authorization } = require("../helpers/auth");
+const { authentication, authorization } = require("../helpers/auth");
 
-// const {
-//     createCategory,
-//     readCategory,
-//     updateCategory,
-//     deleteCategory,
-//     ignoreFavicon
-// } = require('../controllers/category')
+const {
+    createCategory,
+    readCategory,
+    updateCategory,
+    deleteCategory
+} = require('../controllers/category')
 
 Route
-    .post('/')
-    .get('/')
-    .get('/:categoryName')
-    .patch('/:categoryId')
-    .delete('/:categoryId')
+    .post('/', createCategory)
+    .get('/', readCategory)
+    .get('/:categoryName', readCategory)
+    .patch('/:categoryId', updateCategory)
+    .delete('/:categoryId', deleteCategory)
 
 module.exports = Route
